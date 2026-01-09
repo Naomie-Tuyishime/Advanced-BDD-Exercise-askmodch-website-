@@ -12,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
+import java.util.Random;
 
 import static org.junit.Assert.assertTrue;
 
@@ -25,11 +27,12 @@ public class AddToCartSteps {
 
     }
     @And("I click on product item for opening product detail page")
-    public void click_on_product(){
-        driver.findElement(By.className("astra-shop-thumbnail-wrap"))
-                .click();
-
+    public void click_on_random_product(){
+        List<WebElement> products = driver.findElements(By.className("astra-shop-thumbnail-wrap"));
+        Random random = new Random();
+        products.get(random.nextInt(products.size())).click();
     }
+
 
     @When("I click on the Add to Cart button for a product")
     public void i_click_on_the_button_for_a_product() {

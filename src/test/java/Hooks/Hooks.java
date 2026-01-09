@@ -1,13 +1,13 @@
 package Hooks;
 
-import Base.BaseUtils;
+
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Hooks {
-    public BaseUtils base;
+
     public static WebDriver driver;
 
     public Hooks(){
@@ -16,7 +16,6 @@ public class Hooks {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }

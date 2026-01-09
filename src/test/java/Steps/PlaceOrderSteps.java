@@ -71,4 +71,49 @@ public class PlaceOrderSteps {
         Assert.assertEquals("Thank you. Your order has been received.",message);
 
     }
+
+    @When("I leave required billing fields empty")
+    public void iLeaveRequiredBillingFieldsEmpty() {
+        driver.findElement(By.id("billing_first_name")).clear();
+        driver.findElement(By.id("billing_last_name")).clear();
+        driver.findElement(By.id("billing_email")).clear();
+        driver.findElement(By.id("billing_address_1")).clear();
+        driver.findElement(By.id("billing_city")).clear();
+        driver.findElement(By.id("billing_postcode")).clear();
+        driver.findElement(By.id("billing_phone")).clear();
+
+    }
+
+    @And("I click on {string}")
+    public void iClickOn(String arg0) {
+        WebElement placeOrder = driver.findElement(By.cssSelector("button[id='place_order']"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", placeOrder);
+        wait.until(ExpectedConditions.elementToBeClickable(placeOrder)).click();
+
+    }
+
+    @Then("error messages are displayed for each empty required field")
+    public void errorMessagesAreDisplayedForEachEmptyRequiredField() {
+        WebElement firstNameError = driver.findElement(By.id("billing_first_name_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement lastNameError = driver.findElement(By.id("billing_last_name_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement emailError = driver.findElement(By.id("billing_email_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement addressError = driver.findElement(By.id("billing_address_1_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement cityError = driver.findElement(By.id("billing_city_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement postcodeError = driver.findElement(By.id("billing_postcode_field")).findElement(By.cssSelector("span.woocommerce-error"));
+        WebElement phoneError = driver.findElement(By.id("billing_phone_field")).findElement(By.cssSelector("span.woocommerce-error"));
+
+        Assert.assertEquals("Billing First name is a required field.", firstNameError.getText());
+        Assert.assertEquals("Billing Last name is a required field.", lastNameError.getText());
+        Assert.assertEquals("Billing Email address is a required field.", emailError.getText());
+        Assert.assertEquals("Billing Street address is a required field.", addressError.getText());
+        Assert.assertEquals("Billing Town / City is a required field.", cityError.getText());
+        Assert.assertEquals("Billing Postcode / ZIP is a required field.", postcodeError.getText());
+        Assert.assertEquals("Billing Phone is a required field.", phoneError.getText());
+    }
+
+    @And("the order is not placed")
+    public void theOrderIsNotPlaced() {
+        WebElement placeOrder = driver.findElement(By.cssSelector("button[id='place_order']"));
+        Assert.assertTrue(placeOrder.isDisplayed());
+    }
 }
