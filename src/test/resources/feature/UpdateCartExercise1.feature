@@ -1,13 +1,14 @@
-Feature:  Updating product in cart
-  In order to Increase or decrease the product in cart
-  as a customer on  askm online shopping website
-  I want to Update cart successfully
+Feature: Updating product in cart
+  In order to increase or decrease the product in cart
+  As a customer on AskM online shopping website
+  I want to update the cart successfully
 
-  Scenario: Update product in  cart successfully
-    Given I am in the cartPage  of the askomdch website
+  Scenario: Update product in cart successfully
+    Given I am on the cart page
     When I increase or decrease the product quantity in cart
-    Then  Product quantity in the cart should be updated
-Scenario:  Remove product successfully
-  Given I am in the cartPage
-  When I remove a product from the cart
-  Then the product should be removed from the cart
+    Then Product quantity in the cart should be updated
+
+  Scenario: Remove product successfully
+    Given I am on the cart page
+    When I remove a product from the cart
+    Then the product should be removed from the cart
