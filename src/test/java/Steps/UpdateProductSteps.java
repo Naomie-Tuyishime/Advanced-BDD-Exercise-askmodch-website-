@@ -1,5 +1,6 @@
 package Steps;
 
+import Hooks.Hooks;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -13,12 +14,10 @@ import java.time.Duration;
 import static org.junit.Assert.assertTrue;
 
 public class UpdateProductSteps {
-
-    private WebDriver driver;
+    private WebDriver driver = Hooks.driver;
 
     @Given("I am on the cart page")
     public void i_am_on_the_cart_page() {
-        driver = new ChromeDriver();
         driver.get("https://askomdch.com/store");
         driver.findElement(By.cssSelector("a[data-product_id='1198']")).click();
 
