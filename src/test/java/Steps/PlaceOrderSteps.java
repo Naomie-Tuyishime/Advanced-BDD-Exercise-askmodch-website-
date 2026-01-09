@@ -57,12 +57,27 @@ public class PlaceOrderSteps {
     }
 
     @And("I click on Place order button")
-    public void i_click_on() {
-        WebElement placeOrder = driver.findElement(By.cssSelector("button[id='place_order']"));
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", placeOrder);
-        wait.until(ExpectedConditions.elementToBeClickable(placeOrder)).click();
+    public void i_click_on_place_order() {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.cssSelector(".blockUI.blockOverlay")
+        ));
+
+        WebElement placeOrderBtn = wait.until(
+                ExpectedConditions.presenceOfElementLocated(By.id("place_order"))
+        );
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].scrollIntoView({block:'center'});", placeOrderBtn);
+
+        ((JavascriptExecutor) driver)
+                .executeScript("arguments[0].click();", placeOrderBtn);
     }
+
+
+
     @Then("the order is placed successfully")
     public void the_order_is_placed_successfully() {
         WebElement successMessage = driver.findElement(By.cssSelector("div.woocommerce-order p"));
