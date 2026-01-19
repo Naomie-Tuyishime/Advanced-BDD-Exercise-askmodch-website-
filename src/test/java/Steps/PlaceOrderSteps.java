@@ -12,13 +12,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.CartPage;
 
 import java.time.Duration;
 import java.util.Map;
 
 public class PlaceOrderSteps {
-
-   private final WebDriver driver = Hooks.driver;
+WebDriver driver ;
+   private final CartPage cartPage = new CartPage();
    private final MproceedToCheckOutSteps checkout = new MproceedToCheckOutSteps();
    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 

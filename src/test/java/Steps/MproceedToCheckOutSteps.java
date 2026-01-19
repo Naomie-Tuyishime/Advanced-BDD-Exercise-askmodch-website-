@@ -10,11 +10,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.CheckoutPage;
 
 import java.time.Duration;
 
 public class MproceedToCheckOutSteps {
-    private final WebDriver driver = Hooks.driver;
+WebDriver driver;
+    private final CheckoutPage checkoutPage = new CheckoutPage(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     protected LoginStepDefinition login = new LoginStepDefinition();
 

@@ -1,6 +1,7 @@
 package Steps;
 
 import Hooks.Hooks;
+import factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,11 +19,13 @@ import java.util.Random;
 import static org.junit.Assert.assertTrue;
 
 public class AddToCartSteps {
-    private final WebDriver driver = Hooks.driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
+WebDriver driver ;
+WebDriverWait wait ;
     @Given("I am on the product listing page")
-    public void i_am_on_the_product_listing_page() {
+    public void i_am_on_the_product_listing_page(){
+
+       DriverFactory.getDriver();
         driver.get("https://askomdch.com/store/");
 
     }

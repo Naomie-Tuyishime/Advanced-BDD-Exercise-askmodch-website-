@@ -9,15 +9,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import pages.CartPage;
 
 import java.time.Duration;
 
+
 public class BviewCartSteps {
-    private final WebDriver driver = Hooks.driver;
+    WebDriver driver;
+    private final CartPage cartPage = new CartPage();
 
     @Given("I have added a product to the cart")
     public void i_have_added_a_product_to_the_cart() {
-    driver.get("https://askomdch.com/store/");
+  cartPage.load("https://askomdch.com/store/");
     driver.findElement(By.cssSelector("a[data-product_id ='1206']")).click();
     driver.findElement(By.cssSelector("a[data-product_id ='1193']")).click();
 

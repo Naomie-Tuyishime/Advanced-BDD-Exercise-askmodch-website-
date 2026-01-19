@@ -1,6 +1,7 @@
 package Steps;
 
 import Hooks.Hooks;
+import factory.DriverFactory;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -10,18 +11,21 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AccountPage;
 
 import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
 public class LoginStepDefinition {
-    private final WebDriver driver = Hooks.driver;
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    WebDriver driver;
+    private final AccountPage  accountPage = new AccountPage(driver);
+
 
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
-       driver.get("https://askomdch.com/account/");
+        DriverFactory.getDriver();
+      accountPage.load("https://askomdch.com/account/");
     }
 
     @When("I enter valid credentials")
@@ -43,8 +47,8 @@ public class LoginStepDefinition {
 
     @Then("I should be taken to the dashboard")
     public void i_should_be_taken_to_the_dashboard() {
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.woocommerce-MyAccount-content p")));
+//
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.woocommerce-MyAccount-content p")));
         String getUserName = driver.findElement(By.cssSelector("div.woocommerce-MyAccount-content p")).getText();
         Assert.assertEquals("Hello Christ (not Christ? Log out)",getUserName);
         System.out.println(getUserName);
@@ -52,14 +56,14 @@ public class LoginStepDefinition {
     }
     @Then("I should see the error message")
     public void get_error_message(){
-     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("ul.woocommerce-error li")));
+//     wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("ul.woocommerce-error li")));
      String errorMessage = driver.findElement(By.cssSelector("ul.woocommerce-error li")).getText();
      assertTrue(errorMessage.contains("incorrect. Lost your password?"));
         System.out.println(errorMessage);
     }
     @And("I should see the option Lost your password? option")
     public void get_forgetPassword_option(){
-    wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Lost your password?")));
+//    wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Lost your password?")));
       String lostPassword = driver.findElement(By.linkText("Lost your password?")).getText();
       assertTrue(lostPassword.contains("Lost your password?"));
         System.out.println(lostPassword);

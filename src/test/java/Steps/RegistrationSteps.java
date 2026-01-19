@@ -1,6 +1,7 @@
 package Steps;
 
 import Hooks.Hooks;
+import factory.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -8,20 +9,24 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.AccountPage;
 
 import java.time.Duration;
 import java.util.Map;
 
 public class RegistrationSteps {
-    private final WebDriver driver = Hooks.driver;
+    WebDriver driver ;
+private final AccountPage accountPage= new AccountPage(driver);
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     @Given("I am on the registration page")
     public void i_am_on_the_registration_page() {
+        DriverFactory.getDriver();
 
-        driver.get("https://askomdch.com/account/");
+       accountPage.load("https://askomdch.com/account/");
 
     }
     @When("I register with valid details:")
